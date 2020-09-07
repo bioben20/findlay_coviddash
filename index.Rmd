@@ -1,0 +1,109 @@
+---
+title: "COVID-19 at UFindlay"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: ["facebook", "twitter", "linkedin"]
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+#-----------Packages---------------
+library(flexdashboard)
+`%>%` <- magrittr::`%>%`
+
+#----------Data--------------------
+library(googlesheets4)
+ufc19 <- read_sheet("1xjwASri8-Ozw5QkEOEuE-UH8BFOLe-t4rbiMqFzB9BA")
+
+totalConf <- ufc19$total %>% max()
+activeNow <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[3]
+totalDead <- ufc19$deaths %>% max()
+
+```
+
+Row {data-width = 400}
+-----------------------------------------------------------------------
+
+### confirmed {.value-box}
+
+```{r}
+valueBox(
+  value = totalConf,
+  caption = "Total confirmed Cases",
+  color = "#1b9e77",
+  icon = "fas fa-user-md"
+)
+```
+
+### active {.value-box}
+
+```{r}
+valueBox(
+  value = max(activeNow),
+  caption = "Active cases",
+  color = "#d95f02",
+  icon = "fas fa-thermometer"
+)
+```
+
+### death {.value-box}
+
+```{r}
+valueBox(
+  value = totalDead,
+  caption = "Death Cases",
+  color = "#7570b3",
+  icon = "fas fa-hospital"
+)
+
+```
+
+
+Row 
+-----------------------------------------------------------------------
+
+### **Weekly Cumulative Cases by Type**
+
+```{r}
+plotly::plot_ly(data = ufc19) %>%
+  plotly::add_trace(
+    x = ~date, 
+    y = ~total, 
+    type = 'scatter', 
+    name= "Confirmed", 
+    mode = "lines+markers"
+  ) %>%
+  plotly::add_trace(
+    x = ~date,
+    y = ~deaths, 
+    type = 'scatter',
+    name = 'Deaths', 
+    mode = 'lines+markers'
+  ) %>%
+  plotly::layout(
+    xaxis=list(title = ""),
+    yaxis = list(title = "Cumulative Number of Cases"),
+    hovermode  = "compare"
+  )
+```
+
+
+### **Key Trends:** Active Cases
+
+```{r}
+
+plotly::plot_ly(data = ufc19) %>%
+  plotly::add_trace(
+    x = ~date, 
+    y = ~active, 
+    type = 'scatter', 
+    name= "Active", 
+    mode = "lines+markers"
+  ) %>%
+  plotly::layout(
+    xaxis=list(title = ""),
+    yaxis = list(title = "Active cases")
+  )
+```
+
