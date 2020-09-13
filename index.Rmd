@@ -17,10 +17,14 @@ library(googlesheets4)
 ufc19 <- read_sheet("1xjwASri8-Ozw5QkEOEuE-UH8BFOLe-t4rbiMqFzB9BA")
 
 totalConf <- ufc19$total %>% max()
+perConf <- round(totalConf/sum(ufc19$tests)*100, 1)
 activeNow <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[3]
 totalDead <- ufc19$deaths %>% max()
 
 ```
+
+Dashboard
+=======================================================================
 
 Row {data-width = 400}
 -----------------------------------------------------------------------
@@ -29,8 +33,8 @@ Row {data-width = 400}
 
 ```{r}
 valueBox(
-  value = totalConf,
-  caption = "Total confirmed Cases",
+  value = paste(totalConf, " (", perConf, "%)"),
+  caption = "Total confirmed Cases (positive test rate)",
   color = "#1b9e77",
   icon = "fas fa-user-md"
 )
@@ -63,7 +67,7 @@ valueBox(
 Row 
 -----------------------------------------------------------------------
 
-### **Weekly Cumulative Cases by Type**
+### **Cumulative Cases by Type**
 
 ```{r}
 plotly::plot_ly(data = ufc19) %>%
@@ -107,3 +111,19 @@ plotly::plot_ly(data = ufc19) %>%
   )
 ```
 
+About
+=======================================================================
+
+**The University of Findlay Coronavirus Dashboard** 
+
+The [UF Coronavirus Dashboard](https://bioben20.github.io/findlay_coviddash) provides a record of COVID-19 cases at the [University of Findlay](https://www.findlay.edu/) during the Fall 2020 semester. Students returned to campus on August 17, 2020, and most classes are taught in hybrid, hyflex, or online format. Masks are required in buildings to reduce spread of coronavirus, and classrooms are limited to half of their seating capacity.
+
+**Data**
+
+The data for this dashboard are obtained from the University of Findlay [Start Safe & Stay Safe Covid Dashboard](https://www.findlay.edu/oiler-start-safe-and-stay-safe/covid-dashboard), which provides a weekly snapshot of COVID-19 cases reported by Cosiano Health Center. 
+
+*Data is current as of **`r format(max(ufc19$date), "%A, %B %d, %Y")`***
+
+**Development**
+
+This dashboard was built by [Ben Dolan](https://www.biologyben.com/) in RStudio using [Flexdashboard](http://rmarkdown.rstudio.com/flexdashboard/) and is hosted on [Github Pages](https://pages.github.com/).
