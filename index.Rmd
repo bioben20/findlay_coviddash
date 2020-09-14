@@ -34,7 +34,7 @@ Row {data-width = 400}
 ```{r}
 valueBox(
   value = paste(totalConf, " (", perConf, "%)"),
-  caption = "Total confirmed Cases (positive test rate)",
+  caption = "Total confirmed cases (positive test rate)",
   color = "#1b9e77",
   icon = "fas fa-user-md"
 )
@@ -56,7 +56,7 @@ valueBox(
 ```{r}
 valueBox(
   value = totalDead,
-  caption = "Death Cases",
+  caption = "Death cases",
   color = "#7570b3",
   icon = "fas fa-hospital"
 )
