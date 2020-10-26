@@ -120,7 +120,9 @@ The [UF Coronavirus Dashboard](https://bioben20.github.io/findlay_coviddash) pro
 
 **Data**
 
-The data for this dashboard are obtained from the University of Findlay [Start Safe & Stay Safe Covid Dashboard](https://www.findlay.edu/oiler-start-safe-and-stay-safe/covid-dashboard), which provides a weekly snapshot of COVID-19 cases reported by Cosiano Health Center. 
+The data for this dashboard are obtained from the University of Findlay [Start Safe & Stay Safe Covid Dashboard](https://www.findlay.edu/oiler-start-safe-and-stay-safe/covid-dashboard), which provides a weekly snapshot of COVID-19 cases reported by Cosiano Health Center. According to the dashboard, "case information is gathered from cases of students and employees tested at the University's Cosiano Health Center. In addition, any cases involving students or employees that are reported to the Health Center will be included, once the test is confirmed." Community cases processed by Cosiano are not included in this dashboard.
+
+On October 9, 15, and 22, the University of Findlay made testing available to the campus community on a voluntary basis. The University does not distinguish symptomatic and asymptomatic cases in their weekly report. Prior to these events, Cosiano Health Center processed an average of 52 tests per week. For the weeks of Oct 9-22, Cosiano reported an average of 310 tests per week.
 
 *Data is current as of **`r format(max(ufc19$date), "%A, %B %d, %Y")`***
 
