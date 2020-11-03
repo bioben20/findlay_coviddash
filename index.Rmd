@@ -17,7 +17,7 @@ library(googlesheets4)
 ufc19 <- read_sheet("1xjwASri8-Ozw5QkEOEuE-UH8BFOLe-t4rbiMqFzB9BA")
 
 totalConf <- ufc19$total %>% max()
-perConf <- round(totalConf/sum(ufc19$tests)*100, 1)
+positivity <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[7]
 activeNow <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[3]
 totalDead <- ufc19$deaths %>% max()
 
@@ -51,14 +51,14 @@ valueBox(
 )
 ```
 
-### death {.value-box}
+### positivity {.value-box}
 
 ```{r}
 valueBox(
-  value = totalDead,
-  caption = "Death cases",
+  value = paste(round(positivity,digits=2)*100, "%", sep = ""),
+  caption = "Positivity Rate",
   color = "#7570b3",
-  icon = "fas fa-hospital"
+  icon = "ion-android-add-circle"
 )
 
 ```
