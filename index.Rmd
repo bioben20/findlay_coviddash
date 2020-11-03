@@ -20,6 +20,7 @@ totalConf <- ufc19$total %>% max()
 positivity <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[7]
 activeNow <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[3]
 totalDead <- ufc19$deaths %>% max()
+quarantine <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[8]
 
 ```
 
@@ -33,21 +34,21 @@ Row {data-width = 400}
 
 ```{r}
 valueBox(
-  value = paste(totalConf),
-  caption = "Total confirmed cases",
-  color = "#1b9e77",
+  value = paste(totalConf, " (", max(activeNow), ")", sep = ""),
+  caption = "Total confirmed cases (active now)",
+  color = "#ff8300",
   icon = "fas fa-user-md"
 )
 ```
 
-### active {.value-box}
+### quarantine {.value-box}
 
 ```{r}
 valueBox(
-  value = max(activeNow),
-  caption = "Active cases",
-  color = "#d95f02",
-  icon = "fas fa-thermometer"
+  value = quarantine,
+  caption = "Students in quarantine",
+  color = "#ebe355",
+  icon = "ion-android-home"
 )
 ```
 
@@ -56,8 +57,8 @@ valueBox(
 ```{r}
 valueBox(
   value = paste(round(positivity,digits=2)*100, "%", sep = ""),
-  caption = "Positivity Rate",
-  color = "#7570b3",
+  caption = "Testing positivity rate",
+  color = "#644a8c",
   icon = "ion-android-add-circle"
 )
 
