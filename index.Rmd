@@ -17,10 +17,12 @@ library(googlesheets4)
 ufc19 <- read_sheet("1xjwASri8-Ozw5QkEOEuE-UH8BFOLe-t4rbiMqFzB9BA")
 
 totalConf <- ufc19$total %>% max()
-positivity <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[7]
+total_tests <- ufc19$total_tests %>% max()
+positivity <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[8]
 activeNow <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[3]
 totalDead <- ufc19$deaths %>% max()
-quarantine <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[8]
+quarantine <- dplyr::filter(ufc19, ufc19$date == max(ufc19$date))[9]
+long_avg <- round(totalConf/total_tests*100, 0)
 
 ```
 
@@ -56,8 +58,8 @@ valueBox(
 
 ```{r}
 valueBox(
-  value = paste(round(positivity,digits=2)*100, "%", sep = ""),
-  caption = "Testing positivity rate",
+  value = paste(round(positivity,digits=2)*100, "% (", long_avg, "%)", sep = ""),
+  caption = "Last week's positivity, (Average positivity since Aug 17)",
   color = "#644a8c",
   icon = "ion-android-add-circle"
 )
