@@ -59,7 +59,7 @@ valueBox(
 ```{r}
 valueBox(
   value = paste(round(positivity,digits=2)*100, "% (", long_avg, "%)", sep = ""),
-  caption = "Last week's positivity, (Average positivity since Aug 17)",
+  caption = "Weekly positivity (average since Aug 17)",
   color = "#644a8c",
   icon = "ion-android-add-circle"
 )
