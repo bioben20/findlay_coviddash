@@ -24,3 +24,4 @@ cases.exponential2 <- exp(predict(exponent.fit,list(weeks=threeweeks))) #calcula
 plot(weeks, ufc19$total, pch=16, xlim=c(1, three), ylim=c(0, max(cases.exponential2)), xlab = "Week(s)", ylab = "Total Cases")
 lines(threeweeks, cases.exponential2, lwd=2, col = "red")
 legend('topleft', legend = rp, bty = 'n') #same legend as above
+
